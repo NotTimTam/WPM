@@ -9,7 +9,7 @@ let strLst = [
     `If you shut your eyes and are a lucky one, you may see at times a shapeless pool of lovely pale colours suspended in the darkness;`,
     `Suffering has been stronger than all other teaching, and has taught me to understand what your heart used to be. I have been bent and broken, but, I hope, into a better shape.`,
     `It is a fair, even-handed, noble adjustment of things, that while there is infection in disease and sorrow, there is nothing in the world so irresistibly contagious as laughter and good humour.`,
-    `Jim said that bees won't sting idiots, but I didn’t believe that, because I tried them lots of times myself and they wouldn't sting me.`,
+    `Jim said that bees won't sting idiots, but I didn't believe that, because I tried them lots of times myself and they wouldn't sting me.`,
     `What you do in this world is a matter of no consequence. The question is what can you make people believe you have done.`,
     `Now is the dramatic moment of fate, Watson, when you hear a step upon the stair which is walking into your life, and you know not whether for good or ill.`,
     `There comes an end to all things; the most capacious measure is filled at last; and this brief condescension to evil finally destroyed the balance of my soul.`,
