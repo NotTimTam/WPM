@@ -27,8 +27,25 @@ html, body {
 
     padding: 15px;
 
-    max-width: 75vw;
+    width: 75vw;
 
     font-family: monospace;
     font-size: 2em;
+}
+
+#shuffle {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 2em;
+
+    transition: all 0.3s;
+}
+
+#shuffle:hover {
+    transform: scale(1.1);
+}
+
+#shuffle:active {
+    transform: rotate(180deg);
 }

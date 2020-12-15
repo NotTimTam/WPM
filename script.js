@@ -29,7 +29,7 @@ const wpm_disp = document.getElementById("wpm");
 const acc_disp = document.getElementById("accuracy");
 
 // Update display;
-function updateStringDisplay(color = "#008000") {
+function updateStringDisplay(color = "blue") {
     // Clear the display.
     disp.innerHTML = "";
 
@@ -125,4 +125,18 @@ function inc() {
 
     // Update display.
     acc_disp.innerText = "ACC: " + accuracy.toFixed(2) + '%';
+}
+
+// Reset with a new quote.
+function newGame(element) {
+    string = strLst[Math.floor(Math.random() * strLst.length)];
+    time = 0;
+    character = 0;
+    cpm = 0;
+    incorrect_chars = 0;
+    paused = true;
+
+    updateStringDisplay("blue");
+
+    element.blur();
 }
