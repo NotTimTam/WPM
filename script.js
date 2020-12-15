@@ -1,16 +1,20 @@
 // Strings
 let strLst = [
-    `Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do.`,
-    `I'm a success today because I had a friend who believed in me and I didn't have the heart to let him down.`,
-    `Success is not final, failure is not fatal: it is the courage to continue that counts.`,
-    `We all make choices in life, but in the end our choices make us. A man chooses, a slave obeys.`,
-    `The right man in the wrong place can make all the difference in the world.`,
-    `How many are there in you? Whose hopes and dreams do you encompass? Could you but see the eyes in your own, the minds in your mind, you would see how much we share.`,
-    `The healthy human mind doesn't wake up in the morning thinking this is its last day on Earth. But I think that's a luxury, not a curse. To know you're close to the end is a kind of freedom. Good time to take inventory.`,
-    `Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.`,
-    `You know you're in love when you can't fall asleep because reality is finally better than your dreams.`,
-    `If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals.`,
-    `Friendship is born at the moment when one man says to another "What! You too? I thought that no one but myself..."`
+    `You may be an undigested bit of beef, a blot of mustard, a crumb of cheese, a fragment of an underdone potato. There's more of gravy than of grave about you, whatever you are!`,
+    `Life, although it may only be an accumulation of anguish, is dear to me, and I will defend it. Remember, thou hast made me more powerful than thyself; my height is superior to thine, my joints more supple.`,
+    `My dear, do not give way to such gloomy thoughts. Let us hope for better things. Let us flatter ourselves that I may be the survivor.`,
+    `But it's no use now to pretend to be two people! Why, there's hardly enough of me left to make one respectable person!`,
+    `No matter how dreary and gray our homes are, we people of flesh and blood would rather live there than in any other country, be it ever so beautiful. There is no place like home.`,
+    `There is an ecstasy that marks the summit of life, and beyond which life cannot rise. And such is the paradox of living, this ecstasy comes when one is most alive, and it comes as a complete forgetfulness that one is alive.`,
+    `If you shut your eyes and are a lucky one, you may see at times a shapeless pool of lovely pale colours suspended in the darkness;`,
+    `Suffering has been stronger than all other teaching, and has taught me to understand what your heart used to be. I have been bent and broken, but, I hope, into a better shape.`,
+    `It is a fair, even-handed, noble adjustment of things, that while there is infection in disease and sorrow, there is nothing in the world so irresistibly contagious as laughter and good humour.`,
+    `Jim said that bees won't sting idiots, but I didn’t believe that, because I tried them lots of times myself and they wouldn't sting me.`,
+    `What you do in this world is a matter of no consequence. The question is what can you make people believe you have done.`,
+    `Now is the dramatic moment of fate, Watson, when you hear a step upon the stair which is walking into your life, and you know not whether for good or ill.`,
+    `There comes an end to all things; the most capacious measure is filled at last; and this brief condescension to evil finally destroyed the balance of my soul.`,
+    `A wonderful fact to reflect upon, that every human creature is constituted to be that profound secret and mystery to every other.`,
+    `There is no folly of the beast of the earth which is not infinitely outdone by the madness of man.`
 ];
 
 // Variables.
@@ -20,15 +24,23 @@ let character = 0;
 let cpm = 0;
 let incorrect_chars = 0;
 
+// Is the game paused.
 let paused = true;
+
+// Is the game on blindfolded mode.
+let blindfolded = false;
+
+// Score history.
+let scoreHistory = [];
 
 // Objects.
 const disp = document.getElementById("display");
 const time_disp = document.getElementById("time");
 const wpm_disp = document.getElementById("wpm");
 const acc_disp = document.getElementById("accuracy");
+let win_disp = document.getElementById("winhistory");
 
-// Update display;
+// Update display.
 function updateStringDisplay(color = "blue") {
     // Clear the display.
     disp.innerHTML = "";
@@ -38,7 +50,17 @@ function updateStringDisplay(color = "blue") {
         if (i == character) {
             disp.innerHTML += `<span style="background-color: ${color}; color: white;">${string[i]}</span>`;
         } else {
-            disp.innerHTML += string[i];
+            if (blindfolded) {
+                if (i == character) {
+                    disp.innerHTML += `<span style="background-color: white; color: white;">${string[i]}</span>`;
+                } else if (i == character-1 || i == character+1) {
+                    disp.innerHTML += `<span style="background-color: white; color: black; opacity: 75%;">${string[i]}</span>`;
+                } else {
+                    disp.innerHTML += `<span style="background-color: white; color: black; opacity: 0%;">${string[i]}</span>`;
+                }
+            } else {
+                disp.innerHTML += string[i];
+            }
         }
     }
 }
@@ -87,6 +109,11 @@ window.addEventListener("keypress", function (e) {
     }
 
     // Check if we need to pause because we won.
+    if (character == string.length && !paused) {
+        scoreHistory.push(wpm());
+        displayWins();
+        console.log(scoreHistory);
+    }
     if (character == string.length) {
         paused = true;
     } else {
@@ -113,6 +140,8 @@ function wpm() {
 
     // Update display.
     wpm_disp.innerHTML = `WPM: ${Math.ceil(wpm)}<br>NET WPM: ${Math.ceil(net_wpm)}`;
+
+    return wpm.toFixed(2);
 }
 
 // Calculate accuracy.
@@ -128,7 +157,7 @@ function inc() {
 }
 
 // Reset with a new quote.
-function newGame(element) {
+function newGame(element=document.getElementById("shuffle")) {
     string = strLst[Math.floor(Math.random() * strLst.length)];
     time = 0;
     character = 0;
@@ -139,4 +168,30 @@ function newGame(element) {
     updateStringDisplay("blue");
 
     element.blur();
+
+    wpm_disp.innerHTML = "WPM: 0<br>NET WPM: 0";
+}
+
+
+// Display wins.
+function displayWins() {
+    win_disp.innerHTML = "";
+    for (let i = scoreHistory.length-1; i >= 0; i--) {
+        console.log(i)
+        win_disp.innerHTML += scoreHistory[i] + '<br>';
+    }
+}
+
+// Toggle blindfold.
+function blindfold() {
+    blindfolded = !blindfolded;
+
+    let blindfoldbutton = document.getElementById("blindfolded");
+    if (blindfolded) {
+        blindfoldbutton.src = "images/lined.svg";
+    } else {
+        blindfoldbutton.src = "images/no lined.svg";
+    }
+
+    updateStringDisplay();
 }

@@ -4,6 +4,10 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .test {
     display: flex;
 
@@ -39,13 +43,53 @@ html, body {
     background: none;
     font-size: 2em;
 
-    transition: all 0.3s;
+    width: 32px;
+    height: 32px;
+
+    border-radius: 1em;
+
+    transition: all 0.5s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #shuffle:hover {
     transform: scale(1.1);
+    background-color: #778899;
 }
 
 #shuffle:active {
-    transform: rotate(180deg);
+    transform: rotate(-180deg);
+    background-color: #68d368;
+}
+
+#blindfolded {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 2em;
+
+    width: 32px;
+    height: 32px;
+
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    border-radius: 1em;
+
+    transition: all 0.5s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#blindfolded:hover {
+    transform: scale(1.1);
+    background-color: #778899;
+}
+
+#blindfolded:active {
+    background-color: #68d368;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
 }

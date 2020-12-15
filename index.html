@@ -20,14 +20,21 @@
             <h3 id="wpm">WPM: 0<br>NET WPM: 0</h3>
             <h3 id="accuracy">ACC: 0.00%</h3>
             <h3 id="time">0s</h3>
-            <input type="button" value="🔄" id="shuffle" onclick="newGame(this);" title="Reshuffle...">
+
+            <div class="buttons">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/54/54529.svg" alt="Shuffle" title="Shuffle..." id="shuffle" onclick="newGame(this);">
+
+                <img src="images/no lined.svg" alt="Blindfolded" title="Play blindfolded..." id="blindfolded" onclick="blindfold();">
+            </div>
         </div>
         <div class="display" id="display">
             <p>The quick brown fox jumped over the lazy dog.</p>
         </div>
     </div>
 
-    <p style="text-align: center;">We're ready when you are! Begin typing to start...<br>A random quote from a famous person or pop culture will be picked for you.</p>
+    <p style="text-align: center;">We're ready when you are! <strong>Begin typing to start...</strong><br>Paragraph from the most popular books on <a href="http://www.gutenberg.org/ebooks/search/?sort_order=downloads">Project Gutenberg</a></p>
+
+    <div class="winhistory" id="winhistory"></div>
     
     <script src="script.js"></script>
 </body>
