@@ -17,6 +17,10 @@ let strLst = [
     `There is no folly of the beast of the earth which is not infinitely outdone by the madness of man.`
 ];
 
+// let strLst = [
+//     `I am he as you are he as you are me and we are you. Just because you're paranoid doesn't mean they aren't after you. You can, you should, and if you are brave enough to start, you will.`
+// ];
+
 // Variables.
 let string = strLst[Math.floor(Math.random() * strLst.length)];
 let time = 0;
