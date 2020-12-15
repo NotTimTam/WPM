@@ -1,25 +1,23 @@
 // Strings
-let strLst = [
-    `You may be an undigested bit of beef, a blot of mustard, a crumb of cheese, a fragment of an underdone potato. There's more of gravy than of grave about you, whatever you are!`,
-    `Life, although it may only be an accumulation of anguish, is dear to me, and I will defend it. Remember, thou hast made me more powerful than thyself; my height is superior to thine, my joints more supple.`,
-    `My dear, do not give way to such gloomy thoughts. Let us hope for better things. Let us flatter ourselves that I may be the survivor.`,
-    `But it's no use now to pretend to be two people! Why, there's hardly enough of me left to make one respectable person!`,
-    `No matter how dreary and gray our homes are, we people of flesh and blood would rather live there than in any other country, be it ever so beautiful. There is no place like home.`,
-    `There is an ecstasy that marks the summit of life, and beyond which life cannot rise. And such is the paradox of living, this ecstasy comes when one is most alive, and it comes as a complete forgetfulness that one is alive.`,
-    `If you shut your eyes and are a lucky one, you may see at times a shapeless pool of lovely pale colours suspended in the darkness;`,
-    `Suffering has been stronger than all other teaching, and has taught me to understand what your heart used to be. I have been bent and broken, but, I hope, into a better shape.`,
-    `It is a fair, even-handed, noble adjustment of things, that while there is infection in disease and sorrow, there is nothing in the world so irresistibly contagious as laughter and good humour.`,
-    `Jim said that bees won't sting idiots, but I didn't believe that, because I tried them lots of times myself and they wouldn't sting me.`,
-    `What you do in this world is a matter of no consequence. The question is what can you make people believe you have done.`,
-    `Now is the dramatic moment of fate, Watson, when you hear a step upon the stair which is walking into your life, and you know not whether for good or ill.`,
-    `There comes an end to all things; the most capacious measure is filled at last; and this brief condescension to evil finally destroyed the balance of my soul.`,
-    `A wonderful fact to reflect upon, that every human creature is constituted to be that profound secret and mystery to every other.`,
-    `There is no folly of the beast of the earth which is not infinitely outdone by the madness of man.`
-];
-
 // let strLst = [
-//     `I am he as you are he as you are me and we are you. Just because you're paranoid doesn't mean they aren't after you. You can, you should, and if you are brave enough to start, you will.`
+//     `You may be an undigested bit of beef, a blot of mustard, a crumb of cheese, a fragment of an underdone potato. There's more of gravy than of grave about you, whatever you are!`,
+//     `Life, although it may only be an accumulation of anguish, is dear to me, and I will defend it. Remember, thou hast made me more powerful than thyself; my height is superior to thine, my joints more supple.`,
+//     `My dear, do not give way to such gloomy thoughts. Let us hope for better things. Let us flatter ourselves that I may be the survivor.`,
+//     `But it's no use now to pretend to be two people! Why, there's hardly enough of me left to make one respectable person!`,
+//     `No matter how dreary and gray our homes are, we people of flesh and blood would rather live there than in any other country, be it ever so beautiful. There is no place like home.`,
+//     `There is an ecstasy that marks the summit of life, and beyond which life cannot rise. And such is the paradox of living, this ecstasy comes when one is most alive, and it comes as a complete forgetfulness that one is alive.`,
+//     `If you shut your eyes and are a lucky one, you may see at times a shapeless pool of lovely pale colours suspended in the darkness;`,
+//     `Suffering has been stronger than all other teaching, and has taught me to understand what your heart used to be. I have been bent and broken, but, I hope, into a better shape.`,
+//     `It is a fair, even-handed, noble adjustment of things, that while there is infection in disease and sorrow, there is nothing in the world so irresistibly contagious as laughter and good humour.`,
+//     `Jim said that bees won't sting idiots, but I didn't believe that, because I tried them lots of times myself and they wouldn't sting me.`,
+//     `What you do in this world is a matter of no consequence. The question is what can you make people believe you have done.`,
+//     `Now is the dramatic moment of fate, Watson, when you hear a step upon the stair which is walking into your life, and you know not whether for good or ill.`,
+//     `There comes an end to all things; the most capacious measure is filled at last; and this brief condescension to evil finally destroyed the balance of my soul.`,
+//     `A wonderful fact to reflect upon, that every human creature is constituted to be that profound secret and mystery to every other.`,
+//     `There is no folly of the beast of the earth which is not infinitely outdone by the madness of man.`
 // ];
+
+let strLst = ['yes'];
 
 // Variables.
 let string = strLst[Math.floor(Math.random() * strLst.length)];
@@ -145,7 +143,7 @@ function wpm() {
     // Update display.
     wpm_disp.innerHTML = `WPM: ${Math.ceil(wpm)}<br>NET WPM: ${Math.ceil(net_wpm)}`;
 
-    return wpm.toFixed(2);
+    return wpm;
 }
 
 // Calculate accuracy.
@@ -179,11 +177,20 @@ function newGame(element=document.getElementById("shuffle")) {
 
 // Display wins.
 function displayWins() {
-    win_disp.innerHTML = "";
-    for (let i = scoreHistory.length-1; i >= 0; i--) {
-        console.log(i)
-        win_disp.innerHTML += scoreHistory[i] + '<br>';
+    let average = 0;
+    let top = 0;
+    
+    for (let i = 0; i < scoreHistory.length; i++) {
+        if (scoreHistory[i] > top) {
+            top = scoreHistory[i];
+        }
+
+        average += scoreHistory[i];
     }
+
+    average = average / scoreHistory.length;
+
+    win_disp.innerHTML = `High Score: ${top.toFixed(2)}<br>Average WPM: ${average.toFixed(2)}`;
 }
 
 // Toggle blindfold.
